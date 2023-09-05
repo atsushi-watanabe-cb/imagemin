@@ -1,4 +1,4 @@
-# 画像圧縮スクリプト
+# Image compression script
 
 ## Usage
 
