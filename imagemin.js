@@ -39,7 +39,7 @@ subDirs.forEach(async (directory) => {
     fs.mkdirSync(distSubDir, { recursive: true });
   }
 
-  await imagemin([`${srcSubDir}/*.{jpg,jpeg,png}`], {
+  await imagemin([`${srcSubDir}/*.{jpg,jpeg,JPG,png}`], {
     destination: distSubDir,
     plugins: [
       imageminMozJpeg({ quality: options.jpgQuality }),
