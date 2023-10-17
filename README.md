@@ -1,4 +1,4 @@
-# Image compression script
+# Image compression script and Convert heic to jpg
 
 ## Usage
 
@@ -19,7 +19,15 @@ $ node imagemin.js -i ~/Desktop/images
 
 4. Compressed images are placed in the dist directory.
 
-## Options
+### Convert HEIC to JPG
+
+```bash
+$ node heicToJpg.js -i ~/Desktop/images
+```
+
+Similar to image compression, it will be sent to the dist directory.
+
+## Options (only image compression)
 
 ```bash
 # example
