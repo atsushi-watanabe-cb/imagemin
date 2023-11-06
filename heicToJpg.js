@@ -45,23 +45,45 @@ subDirs.forEach(async (directory) => {
       }
       const inputBuffer = fs.readFileSync(`${srcSubDir}/${file}`);
 
-      if (file.includes(".heic") || file.includes(".HEIC")) {
+      if (file.includes(".heic")) {
         convert({
           buffer: inputBuffer,
           format: "JPEG",
           quality: 0.5,
-        }).then((data) => {
-          fs.writeFileSync(
-            `${distSubDir}/${file.replace("heic", "jpg")}`,
-            data
+        })
+          .then((data) => {
+            fs.writeFileSync(
+              `${distSubDir}/${file.replace("heic", "jpg")}`,
+              data
+            );
+            console.log(
+              `Convert HEIC to JPG in ${srcSubDir}/${file} completed`
+            );
+          })
+          .catch((_error) =>
+            console.log(`${srcSubDir}/${file}はHEICファイルではありません`)
           );
-        });
-      }
-      if (!file.includes(".heic")) {
+      } else if (file.includes(".HEIC")) {
+        convert({
+          buffer: inputBuffer,
+          format: "JPEG",
+          quality: 0.5,
+        })
+          .then((data) => {
+            fs.writeFileSync(
+              `${distSubDir}/${file.replace("HEIC", "jpg")}`,
+              data
+            );
+            console.log(
+              `Convert HEIC to JPG in ${srcSubDir}/${file} completed`
+            );
+          })
+          .catch((_error) =>
+            console.log(`${file}はHEICファイルではありません`)
+          );
+      } else {
         fs.writeFileSync(`${distSubDir}/${file}`, inputBuffer);
       }
     });
   });
-
-  console.log(`Convert HEIC to JPG in ${srcSubDir} completed`);
 });
