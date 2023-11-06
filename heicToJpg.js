@@ -45,7 +45,7 @@ subDirs.forEach(async (directory) => {
       }
       const inputBuffer = fs.readFileSync(`${srcSubDir}/${file}`);
 
-      if (file.includes(".heic")) {
+      if (file.includes(".heic") || file.includes(".HEIC")) {
         convert({
           buffer: inputBuffer,
           format: "JPEG",
