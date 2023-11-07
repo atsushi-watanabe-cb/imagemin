@@ -39,15 +39,19 @@ subDirs.forEach(async (directory) => {
     fs.mkdirSync(distSubDir, { recursive: true });
   }
 
-  await imagemin([`${srcSubDir}/*.{jpg,jpeg,JPG,png}`], {
-    destination: distSubDir,
-    plugins: [
-      imageminMozJpeg({ quality: options.jpgQuality }),
-      imageminPngquant({
-        quality: options.pngQuality.map((v) => parseFloat(v)),
-      }),
-    ],
-  });
+  try {
+    await imagemin([`${srcSubDir}/*.{jpg,jpeg,JPG,png}`], {
+      destination: distSubDir,
+      plugins: [
+        imageminMozJpeg({ quality: options.jpgQuality }),
+        imageminPngquant({
+          quality: options.pngQuality.map((v) => parseFloat(v)),
+        }),
+      ],
+    });
 
-  console.log(`Compression of images in ${srcSubDir} completed`);
+    console.log(`Compression of images in ${srcSubDir} completed`);
+  } catch (e) {
+    console.log(`failed compression: ${srcSubDir}/`);
+  }
 });
